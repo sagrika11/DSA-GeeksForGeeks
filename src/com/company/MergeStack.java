@@ -77,6 +77,8 @@ public class MergeStack {
         ms2.push(23);
         ms.push(12);
         ms2.push(89);
+        ms.pop();
+        ms2.pop();
       ms.merge(ms2);
 
         ms.show();
