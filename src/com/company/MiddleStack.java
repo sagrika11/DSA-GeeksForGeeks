@@ -1,4 +1,7 @@
 package com.company;
+
+import java.util.Stack;
+
 class Node {
     Node next;
     Node pre;
@@ -8,21 +11,24 @@ class Node {
     }
 }
 public class MiddleStack {
-    Node dummy = new Node(-1);
-    Node top=dummy,middle =dummy;
+   Node top,middle;
     int count=0;
     public  void push(int data) {
         Node node = new Node(data);
         node.pre = null;
         node.next = top;
         count++;
-        top.pre = node;
-        top = node;
+
+
         if (count == 1) {
             middle = node;
-        } else if (count % 2 == 0) {
-            middle = middle.pre;
-        }
+        } else {
+            top.pre = node;
+            if (count % 2 != 0)
+                middle = middle.pre;
+            }
+
+        top = node;
     }
     public void pop(){
         if(count==0){
@@ -35,7 +41,7 @@ public class MiddleStack {
         if(top!=null)
             top.pre=null;
         count--;
-        if(count%2==1){
+        if(count%2==0){
             middle = middle.next;
         }
         System.out.println("Popped Element is : " + x);
@@ -44,16 +50,14 @@ public class MiddleStack {
         if(count==0){
             System.out.println("Stack is Empty");
         }
-        System.out.println("Middle element is : " +middle.data);
+        System.out.println("\nMiddle element is : " +middle.data);
     }
+
     public void show(){
         Node temp =top;
-        if(count==0){
-            System.out.println("Stack is Empty");
-        }
-        for (int i = 0; i <count ; i++) {
-            System.out.println(temp.data);
-            temp=temp.next;
+       while (temp !=null){
+            System.out.print(temp.data + " ");
+            temp = temp.next;
         }
     }
 
@@ -61,13 +65,14 @@ public class MiddleStack {
         MiddleStack ms = new MiddleStack();
         ms.push(78);
         ms.push(23);
+        ms.push(34);
         ms.push(90);
-        ms.push(12);
-        ms.push(56);
-        ms.push(8);
-        ms.push(24);
-        ms.pop();
+
         ms.Mid();
+        ms.show();
+
+
+
 
 
     }
