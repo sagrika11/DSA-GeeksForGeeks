@@ -25,8 +25,8 @@ public class MergeStack {
 
         }
         else {
-            node.pre=tail;
-            tail.next=node;
+            node.next=tail;
+            tail.pre=node;
             tail=node;
 
         }
@@ -39,13 +39,13 @@ public class MergeStack {
             head=tail=null;
         }
         else {
-         tail = tail.pre;
-         tail.next= null;
+         tail = tail.next;
+         tail.pre= null;
         }
     }
     public void merge(MergeStack s){
-      head.pre=s.tail;
-      s.tail.next=head;
+      head.next=s.tail;
+      s.tail.pre=head;
       head=s.head;
       s.tail=null;
       s.head=null;
@@ -55,7 +55,7 @@ public class MergeStack {
          Node_ n =tail;
          while (n!=null){
              System.out.println(n.data);
-             n= n.pre;
+             n= n.next;
          }
 
      }
@@ -71,8 +71,12 @@ public class MergeStack {
         ms2.push(9);
         ms2.push(8);
         ms2.push(7);
-        ms.pop();
-        ms2.pop();
+        ms.push(56);
+        ms.push(34);
+        ms2.push(45);
+        ms2.push(23);
+        ms.push(12);
+        ms2.push(89);
       ms.merge(ms2);
 
         ms.show();
